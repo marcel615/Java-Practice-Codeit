@@ -2,9 +2,9 @@ package oop.constructor;
 
 public class LearningLog {
     //필드
-    private String title;
-    private int minutes;
-    private boolean publicFlag;
+    String title;
+    int minutes;
+    boolean publicFlag;
 
     //ctor
     public LearningLog(){
