@@ -1,4 +1,4 @@
-package Array;
+package basic.Array;
 
 import java.util.Arrays;
 
@@ -29,7 +29,7 @@ public class ArrayBasic {
         System.out.println(Arrays.toString(numbers));
 
         //만약 기존의 배열의 크기를 늘리거나 줄이고 싶으면 배열을 새로 만들어서 값을 옮겨야 한다.
-        
+
 
 
     }
