@@ -10,8 +10,10 @@ public class SprintLogApp {
 
         LearningLog[] javaLogs = new LearningLog[]{javaLog1, javaLog2, javaLog3, javaLog4};
 
-        for (LearningLog log : javaLogs){
-            log.printSummary();
-        }
+        javaLogs[0].printSummary();
+        javaLogs[0].extendMinutes(200);
+        javaLogs[0].changeTitle("Java 객체지향과 캡슐화");
+        javaLogs[0].hideToPublic();
+        javaLogs[0].printSummary();
     }
 }

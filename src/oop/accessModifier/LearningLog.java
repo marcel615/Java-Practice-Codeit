@@ -13,7 +13,7 @@ public class LearningLog {
         this(title, minutes, true);
     }
     public LearningLog(String title, int minutes, boolean publicFlag){
-        this.title = title;
+        this.title = normalizeTitle(title);
         this.minutes = minutes;
         this.publicFlag = publicFlag;
     }
@@ -25,18 +25,18 @@ public class LearningLog {
     public int getMinutes(){
         return minutes;
     }
-    public boolean getPublicFlag(){
+    public boolean isPublicFlag(){
         return publicFlag;
     }
     public void setTitle(String title){
-        this.title = title;
+        this.title = normalizeTitle(title);
     }
     public void setMinutes(int minutes){
         if (minutes <= 0) {
             System.out.println("잘못된 공부 시간입니다.");
             return;
         }
-        this.minutes += minutes;
+        this.minutes = minutes;
     }
     public void setPublicFlag(boolean publicFlag){
         this.publicFlag = publicFlag;
@@ -45,10 +45,34 @@ public class LearningLog {
 
     //method
     public void printSummary(){
-        System.out.println(title + " - " + minutes + "분");
+        String visibility = publicFlag ? "공개" : "비공개";
+        System.out.println(title + " - " + minutes + "분 - " + visibility);
     }
     public boolean isNeedReview(){
         return (minutes < 60);
+    }
+    public void extendMinutes(int minutes){
+        if (minutes <= 0) {
+            System.out.println("잘못된 추가 공부 시간입니다.");
+            return;
+        }
+        this.minutes += minutes;
+    }
+    public void changeTitle(String title){
+        this.title = normalizeTitle(title);
+    }
+    public void openToPublic(){
+        setPublicFlag(true);
+    }
+    public void hideToPublic(){
+        setPublicFlag(false);
+    }
+    // 이 클래스에서만 사용하는 메서드 -> private
+    private String normalizeTitle(String title){
+        if (title == null || title.isBlank()) {
+            return "제목 없음";
+        }
+        return title;
     }
 
 
