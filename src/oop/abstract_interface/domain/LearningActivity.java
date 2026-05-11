@@ -54,7 +54,9 @@ public abstract class LearningActivity {
     }
 
     //abstract method
-    public abstract void printSummary();
+    public abstract String getActivityType();
+    public abstract String getDetailText();
+
 
     //method
     public void extendMinutes(int minutes){
@@ -72,6 +74,9 @@ public abstract class LearningActivity {
     }
     public void hideToPublic(){
         setPublicActivity(false);
+    }
+    public String getVisibilityText(){
+        return isPublicActivity() ? "공개" : "비공개";
     }
     // 이 클래스에서만 사용하는 메서드 -> private
     private String normalizeTitle(String title){

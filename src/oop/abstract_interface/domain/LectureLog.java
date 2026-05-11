@@ -16,10 +16,15 @@ public class LectureLog extends LearningActivity implements Reviewable, Shareabl
 
     //abstract
     @Override
-    public void printSummary() {
-        System.out.println("[강의] #" + getId() + " " + getTitle() + " - " + getMinutes()
-                + "분 - 강사: " + instructorName);
+    public String getActivityType() {
+        return "강의";
     }
+
+    @Override
+    public String getDetailText() {
+        return "강사: " + instructorName;
+    }
+
 
     //interface
     @Override
@@ -28,7 +33,7 @@ public class LectureLog extends LearningActivity implements Reviewable, Shareabl
     }
     @Override
     public void printReviewTarget() {
-        printSummary();
+        System.out.println("[복습 권장] " + getTitle() + " (" + getMinutes() + "분)");
     }
 
     @Override
