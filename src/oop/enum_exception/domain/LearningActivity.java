@@ -1,5 +1,7 @@
 package oop.enum_exception.domain;
 
+import oop.enum_exception.excepion.InvalidActivityException;
+
 public abstract class LearningActivity {
     //필드
     private static int totalObjectCreateCount = 0;
@@ -18,8 +20,11 @@ public abstract class LearningActivity {
     }
     */
     public LearningActivity(String title, int minutes, Visibility visibility, ActivityCategory category){
+        validateTitle(title);
+        validateMinutes(minutes);
+
         this.id = totalObjectCreateCount;
-        this.title = normalizeTitle(title);
+        this.title = title.trim();
         this.minutes = minutes;
         this.visibility = visibility;
         this.category = category;
@@ -27,7 +32,7 @@ public abstract class LearningActivity {
     }
 
     //getter, setter
-    public static int getTotalObjectCreateCount(){
+    public static int getTotalCreateCount(){
         return totalObjectCreateCount;
     }
     public long getId(){
@@ -47,7 +52,8 @@ public abstract class LearningActivity {
     }
 
     public void setTitle(String title){
-        this.title = normalizeTitle(title);
+        validateTitle(title);
+        this.title = title;
     }
     public void setMinutes(int minutes){
         if (minutes <= 0) {
@@ -68,13 +74,13 @@ public abstract class LearningActivity {
     //method
     public void extendMinutes(int minutes){
         if (minutes <= 0) {
-            System.out.println("잘못된 추가 공부 시간입니다.");
-            return;
+            throw new InvalidActivityException("추가 학습 시간은 1분 이상이어야 합니다. 입력값: " + minutes);
         }
         this.minutes += minutes;
     }
     public void changeTitle(String title){
-        this.title = normalizeTitle(title);
+        validateTitle(title);
+        this.title = title;
     }
     public void openToPublic(){
         setVisibility(Visibility.PUBLIC);
@@ -86,11 +92,15 @@ public abstract class LearningActivity {
         return getVisibility() == Visibility.PUBLIC ? "공개" : "비공개";
     }
     // 이 클래스에서만 사용하는 메서드 -> private
-    private String normalizeTitle(String title){
+    private void validateTitle(String title){
         if (title == null || title.isBlank()) {
-            return "제목 없음";
+            throw new InvalidActivityException("학습 제목은 비워둘 수가 없습니다.");
         }
-        return title;
+    }
+    private void validateMinutes(int minutes){
+        if (minutes <= 0) {
+            throw new InvalidActivityException("학습 시간은 1분 이상이어야 합니다.");
+        }
     }
 
 
