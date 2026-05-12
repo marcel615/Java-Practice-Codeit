@@ -18,5 +18,32 @@ public class Main {
                 , new Apple(85, YELLOW)
                 , new Apple(75, YELLOW)
         );
+
+        System.out.println(FilterApple.filterAppleByColor(appleBasket, Color.GREEN));
+        System.out.println("================================================");
+
+        System.out.println(FilterApple.filterApple(appleBasket, new LightApplePredicate()));
+
+        System.out.println("================================================");
+
+        // 녹색이면서 100g 이하인 사과만 필터링
+        // 우리는 이제 익명클래스를 통해, 새 클래스 파일 생성 없이 즉석에서 보낼 수 있다!
+        // 근데... 어짜피 인터페이스에 추상메서드 하나 아니냐?
+        // 그럼 이름을 굳이 언급할 필요 있나? -> 람다식 쓰자!
+        List<Apple> appleBasket2 = FilterApple.filterApple(appleBasket,
+                apple ->
+                        apple.getColor() == GREEN && apple.getWeight() <= 100
+        );
+        System.out.println(appleBasket2);
+        System.out.println("================================================");
+
+        List<Apple> appleBasket3 = FilterApple.filterApple(appleBasket,
+                apple ->
+                        (apple.getColor() == RED || apple.getColor() == GREEN) && apple.getWeight() < 150
+                );
+        System.out.println(appleBasket3);
+
+
+
     }
 }
