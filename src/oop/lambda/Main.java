@@ -2,6 +2,7 @@ package oop.lambda;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static oop.lambda.Color.*;
 
@@ -58,5 +59,18 @@ public class Main {
                 str -> str.length() == 3
                 );
         System.out.println(basket2);
+        System.out.println("================================================");
+
+        System.out.println(MappingApple.map(appleBasket, apple -> apple.getWeight()));
+        System.out.println("================================================");
+
+        //숫자 리스트를 주면 제곱된 수를 리스트화
+        System.out.println(MappingApple.map(numbers, n -> (int)Math.pow(n, 4)));
+
+        //음식 리스트를 주면 첫 글자만 뽑기
+        List<Character> basket3 = MappingApple.map(foods,
+                        n -> n.charAt(0)
+                );
+        System.out.println(basket3);
     }
 }
