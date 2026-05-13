@@ -1,5 +1,6 @@
 package oop.lambda;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static oop.lambda.Color.*;
@@ -39,11 +40,23 @@ public class Main {
 
         List<Apple> appleBasket3 = FilterApple.filterApple(appleBasket,
                 apple ->
-                        (apple.getColor() == RED || apple.getColor() == GREEN) && apple.getWeight() < 150
+                        (apple.getColor() == RED || apple.getColor() == GREEN)
+                        && apple.getWeight() > 150
                 );
         System.out.println(appleBasket3);
+        System.out.println("================================================");
 
+        //여러가지 타입의 객체를 필터링
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> basket = FilterApple.filter(numbers,
+                n -> n % 2 == 0
+                );
+        System.out.println(basket);
 
-
+        List<String> foods = List.of("짜장면", "짬뽕", "탕수육", "피자", "삼겹살", "파스타");
+        List<String> basket2 = FilterApple.filter(foods,
+                str -> str.length() == 3
+                );
+        System.out.println(basket2);
     }
 }

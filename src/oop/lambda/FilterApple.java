@@ -1,5 +1,6 @@
 package oop.lambda;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,4 +51,23 @@ public class FilterApple {
 
         return Basket;
     }
+    /**
+     * problem - 이제는 Apple 리스트만 오는게 아니다!
+     *           Integer도 오고, String도 필터링 해달라고 한다....
+     *
+     * solution - try4: 제네릭 필터 메서드 선언
+     *
+     * 리턴 타입 앞에 붙는 <T>는 이 메서드가 제네릭을 사용하는 메서드고, 지금부터 T라는 임시 타입을 선언한다.
+     * T는 이 메서드가 호출될 때 결정 될거야.
+     */
+    public static <T> List<T> filter(List<T> list, GenericPredicate<T> predicate) {
+        List<T> basket = new ArrayList<>();
+        for (T t : list) {
+            if (predicate.test(t)) {
+                 basket.add(t);
+            }
+        }
+        return basket;
+    }
+
 }
